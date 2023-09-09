@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Speech to Text and Summarization App</title>
+  <script>
+function copyInput() {
+    {query}
+    var input2Value = document.getElementById("trans").value;
+    var input2Value = document.getElementByName("trans").value;
+    document.getElementById("text11").value = input2Value;
+    document.getElementByName("text11").value = input2Value;
+}
+
+</script>
+   <style>
+    /* Header */
+    body{
+      background: url('../static/15.jpg') no-repeat center center fixed;
+       background-size: cover;
+    }
+    h1 {
+      color: #003366;
+      font-size: 36px;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Form */
+    form {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    select {
+      font-size: 16px;
+      padding: 6px 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      font-size: 16px;
+      padding: 6px 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      height: 150px;
+      width: 100%;
+    }
+
+    input[type="submit"] {
+      font-size: 16px;
+      padding: 6px 12px;
+      background-color: #003366;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Results */
+    h3 {
+      color: #003366;
+      font-size: 24px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    /* Hover animation */
+    button:hover, input[type="submit"]:hover {
+      background-color: #fff;
+      color: #003366;
+      border: 1px solid #003366;
+    }
+
+    button:active, input[type="submit"]:active {
+      background-color: #003366;
+      color: #fff;
+    }
+
+    h3 [name="131"]{
+      color: #d6b7b4;
+      font-size: 24px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+
+    h3 [name="141"]{
+      color: #d6b7b4;
+      font-size: 24px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+   </style>
+</head>
+<body>
+  <h1>Speech to Text and Summarization App</h1>
+  <form action="{{ url_for('translate') }}" method="post">
+    <h3>Translate Speech to Text</h3>
+    <label for="language">Select language You want to speak</label>
+    <select name="language" id="language">
+      <option value="1">English</option>
+      <option value="2">Hindi</option>
+      <option value="3">Gujarati</option>
+      <option value="4">Punjabi</option>
+      <option value="5">Marathi</option>
+    </select>
+    <br><br>
+
+    <button name="speech_recognition" onclick="copyInput()">Speak</button>
+    <hidden type="hidden" name="trans" id="trans" value="{{translated}}"></hidden>
+
+
+
+  {% if query %}
+    <h3>You said:</h3>
+    <p >{{ query }}</p>
+    {% if translated %}
+    <h3>Translation:</h3>
+    <p>{{ translated }}</p>
+    {% endif %}
+  {% endif %}
+
+  <hr>
+      </form>
+
+  <form action="{{ url_for('summarize') }}" method="post">
+    <h3>Summarize Text:</h3>
+    <label for="text11">Enter text to summarize:</label>
+    <textarea type="text" name="text11" id="text11" cols="40" rows="5"></textarea>
+    <br><br>
+    <label for="to_language">Translate to language:</label>
+    <select name="to_language" id="to_language">
+      <option value="en">English</option>
+      <option value="hi">Hindi</option>
+      <option value="gu">Gujarati</option>
+      <option value="pa-Guru-IN">Punjabi</option>
+      <option value="mr">Marathi</option>
+    </select>
+    <br><br>
+    <label for="summarize_type">choose type of model:</label>
+    <select name="summarize_type" id="summarize_type">
+      <option value="nltk">NLTK</option>
+      <option value="transformer">Transformer</option>
+    </select>
+    <input type="submit" value="Summarize">
+  </form>
+
+  {% if translated2 %}
+    <h3 name="131">Summary:</h3>
+    <p>{{ translated2 }}</p>
+  {% endif %}
+
+  {% if translated4 %}
+    <h3 name="141">Summary of Text Input:</h3>
+    <p>{{ translated4 }}</p>
+  {% endif %}
+
+
+
+
+</body>
+</html>

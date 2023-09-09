@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Text Summarizer</title>
+  </head>
+  <body>
+    <h1>Text Summarizer</h1>
+    <form action="{{ url_for('summarize') }}" method="post">
+    <h3>Summarize Text:</h3>
+    <label for="text11">Enter text to summarize:</label>
+    <input type="text" name="text11" id="text11" cols="40" rows="5"></input>
+    <br><br>
+    <label for="to_language">Translate to language:</label>
+    <select name="to_language" id="to_language">
+      <option value="en">English</option>
+      <option value="hi">Hindi</option>
+      <option value="gu">Gujarati</option>
+      <option value="pa">Punjabi</option>
+      <option value="mr">Marathi</option>
+    </select>
+    <br><br>
+    <input type="submit" value="Summarize">
+  </form>
+
+  {% if translated1 %}
+    <h3>Summary:</h3>
+    <p>{{ translated1 }}</p>
+  {% endif %}
+  </body>
+</html>
